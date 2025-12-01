@@ -28,6 +28,34 @@
 
 ## Запуск
 
+Для локального запуска проекта предусмотрен docker-compose:
+```yaml
+  services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama:/root/.ollama
+    entrypoint: >
+      /bin/sh -c "
+        ollama serve &
+        sleep 2 &&
+        ollama pull gemma3:12b &&
+        wait
+      "
+    restart: unless-stopped
+```
+
+После запуска нужно немного подождать до загрузки модели.  
+Можно заменить модель на другую.  
+После этого можно запускать:
+
+```bash 
+  python main.py
+ ````
+
 Пример вывода:
 ```commandline
 Разбиваем документы на фрагменты...

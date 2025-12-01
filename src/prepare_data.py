@@ -42,7 +42,7 @@ class DataPreparation:
                 self.vectors = self.model.encode(chunk_texts)
                 print(f"Создано {len(self.vectors)} векторов размерности {self.vectors.shape[1]}")
 
-    def save_knowledge_base(self, base_path='knowledge_base'):
+    def save_knowledge_base(self, base_path: str):
         """Сохраняем базу знаний в файлы"""
 
         # Сохраняем фрагменты

@@ -3,7 +3,7 @@ from typing import List, Dict
 
 
 class AnswerGenerator:
-    def __init__(self, api_key: str):
+    def __init__(self):
         self.system_message = """Ты – помощник, который отвечает на вопросы, опираясь
         строго на предоставленный контекст.
         Правила:

@@ -1,14 +1,14 @@
 from typing import Dict
 
-from answer import AnswerGenerator
-from prepare_data import DataPreparation
-from search import SearchSystem
+from src.answer import AnswerGenerator
+from src.prepare_data import DataPreparation
+from src.search import SearchSystem
 
 
 class RAGSystem:
-    def __init__(self, api_key: str, base_path='knowledge_base'):
+    def __init__(self, base_path: str):
         self.search = SearchSystem(base_path)
-        self.generator = AnswerGenerator(api_key)
+        self.generator = AnswerGenerator()
 
     def answer(self, question: str, num_chunks=3) -> Dict:
         """Основная функция: поиск + генерация ответа"""
@@ -40,12 +40,13 @@ if __name__ == "__main__":
     ]
 
     # Создаём и сохраняем базу знаний
+    knowledge_path = 'knowledge_base'
     data_prep = DataPreparation()
     data_prep.process_documents(documents)
-    data_prep.save_knowledge_base()
+    data_prep.save_knowledge_base(knowledge_path)
 
     # Создаём RAG-систему
-    rag = RAGSystem(api_key="ваш-openai-ключ")
+    rag = RAGSystem(knowledge_path)
 
     # Задаём вопросы
     questions = [
